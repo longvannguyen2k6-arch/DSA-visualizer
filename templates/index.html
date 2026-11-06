@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>DSA Visualizer</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+  </head>
+  <body>
+    <h2>DSA Visualizer - Sorting Algorithms</h2>
+
+    <div class="controls">
+      <input
+        type="text"
+        id="array-input"
+        value="5, 2, 8, 1, 9, 4,11,10"
+        placeholder="Enter numbers separated by commas"
+      />
+      <button onclick="loadSorting()">Load Data</button>
+      <button onclick="player.play()">▶ Play</button>
+      <button onclick="player.pause()">⏸ Pause</button>
+      <button onclick="player.prev()">⏮ Prev Step</button>
+      <button onclick="player.next()">⏭ Next Step</button>
+      <label
+        >Delay (ms):
+        <input
+          type="range"
+          id="speed"
+          min="100"
+          max="1500"
+          value="500"
+          onchange="player.setSpeed(this.value)"
+      /></label>
+    </div>
+
+    <p id="description">Click "Load Data" to initialize...</p>
+    <div id="canvas"></div>
+
+    <!-- Scripts -->
+    <script src="{{ url_for('static', filename='js/sorting.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/player.js') }}"></script>
+  </body>
+</html>
