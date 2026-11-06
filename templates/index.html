@@ -12,6 +12,11 @@
     <h2>DSA Visualizer - Sorting Algorithms</h2>
 
     <div class="controls">
+      <select id="algo-select" onchange="loadSorting()">
+        <option value="bubble_sort">Bubble Sort</option>
+        <option value="insertion_sort">Insertion Sort</option>
+        <option value="merge_sort">Merge Sort</option>
+      </select>
       <input
         type="text"
         id="array-input"

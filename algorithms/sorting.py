@@ -32,3 +32,53 @@ def bubble_sort(arr):
         "description": "done!"
     })
     return steps
+def insertion_sort(arr):
+    steps = []
+    n = len(arr)
+    a = arr.copy()
+    steps.append({
+        "state": a.copy(),
+        "highlights": [],
+        "action": "init",
+        "description": "initially array"
+    })
+    for i in range(1,n):
+        key= a[i]
+        j=i-1
+        while j>=0 and a[j]>key:
+            steps.append({
+                "state": a.copy(),
+                "highlights": [j, j + 1],
+                "action": "compare",
+                "description": f"Shifting {a[j]} to the right (index {j + 1})"
+                                })
+            a[j+1]=a[j]
+            j-=1
+            a[j+1]=key
+            steps.append({
+              "state": a.copy(),
+               "highlights": [ j + 1],
+               "action": "swap",
+                "description": f"Inserted key {key} at index {j + 1}"
+                        })
+    steps.append({
+            "state": a.copy(),
+            "highlights": list(range(n)),
+            "action": "done",
+            "description": "done!"
+        }) 
+    return steps      
+def mure_sort(arr):
+    steps = []
+    n = len(arr)
+    a = arr.copy()
+    steps.append({
+        "state": a.copy(),
+        "highlights": [],
+        "action": "init",
+        "description": "initially array"
+    })          
+            
+        
+        
+    

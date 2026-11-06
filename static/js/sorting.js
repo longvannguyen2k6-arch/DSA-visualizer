@@ -5,7 +5,7 @@ function renderSorting(stepData) {
   stepData.state.forEach((value, index) => {
     const bar = document.createElement("div");
     bar.className = "bar";
-    bar.style.height = value * 25 + "px"; // Scale bar height by value
+    bar.style.height = value * 15 + "px"; // Scale bar height by value
     bar.innerText = value;
 
     // Apply highlight colors based on current action

@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, jsonify
-from  algorithms.sorting import bubble_sort
+from  algorithms.sorting import bubble_sort,insertion_sort
 
 app = Flask(__name__)
 
@@ -13,8 +13,10 @@ def api_sort():
     arr = data.get("array", [5, 2, 8, 1, 9, 3])
     algo = data.get("algorithm", "bubble")
 
-    if algo == "bubble":
+    if algo == "bubble_sort":
         steps = list(bubble_sort(arr))
+    elif algo == "insertion_sort":
+        steps = insertion_sort(arr)
     else:
         steps = []
 

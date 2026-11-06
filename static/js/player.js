@@ -60,6 +60,7 @@ const player = {
 // Fetch sorting steps from Flask backend
 async function loadSorting() {
   const rawInput = document.getElementById("array-input").value;
+  const algo = document.getElementById("algo-select").value;
   // Parse comma-separated string into integer array
   const arr = rawInput
     .split(",")
@@ -69,11 +70,12 @@ async function loadSorting() {
   const response = await fetch("/api/sort", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ array: arr, algorithm: "bubble" }),
+    body: JSON.stringify({ array: arr, algorithm: algo }),
   });
 
   const data = await response.json();
   player.loadSteps(data.steps, renderSorting);
+  updateComplexityUI(data.complexity);
 }
 
 // Auto-load initial visualization on page load
