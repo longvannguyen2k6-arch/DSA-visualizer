@@ -1,9 +1,10 @@
+from collections import deque
 def bfs_tree(arr):
     steps = []
     n = len(arr)
     a = arr.copy()
     visited = []
-    queue = [0] if n > 0 else []
+    queue = deque([0]) if n > 0 else deque()
     steps.append({
         "state": a.copy(),
         "highlights": [],
@@ -12,7 +13,7 @@ def bfs_tree(arr):
         "description": "Initial Binary Tree (Array representation)"
     })
     while queue:
-        curr = queue.pop(0)
+        curr = queue.popleft()
         steps.append({
             "state": a.copy(),
             "visited": visited.copy(),
