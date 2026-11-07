@@ -1,5 +1,8 @@
 function renderSorting(stepData) {
   const canvas = document.getElementById("canvas");
+  canvas.style.justifyContent = "center";
+  canvas.style.flexDirection = "row";
+  canvas.style.alignItems = "flex-end";
   canvas.innerHTML = ""; // Clear previous step
 
   stepData.state.forEach((value, index) => {

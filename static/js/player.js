@@ -74,8 +74,8 @@ async function loadSorting() {
   });
 
   const data = await response.json();
-  player.loadSteps(data.steps, renderSorting);
-  updateComplexityUI(data.complexity);
+  const chosenRenderer = algo.includes("tree") ? renderTree : renderSorting;
+  player.loadSteps(data.steps, chosenRenderer);
 }
 
 // Auto-load initial visualization on page load
