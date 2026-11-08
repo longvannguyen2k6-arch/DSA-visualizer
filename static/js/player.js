@@ -61,7 +61,8 @@ const player = {
 async function loadSorting() {
   const rawInput = document.getElementById("array-input").value;
   const algo = document.getElementById("algo-select").value;
-  // Parse comma-separated string into integer array
+  const targetInput = document.getElementById("target-input");
+  const target = targetInput ? parseInt(targetInput.value) || 0 : 0;
   const arr = rawInput
     .split(",")
     .map((num) => parseInt(num.trim()))
@@ -70,11 +71,13 @@ async function loadSorting() {
   const response = await fetch("/api/sort", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ array: arr, algorithm: algo }),
+    body: JSON.stringify({ array: arr, algorithm: algo, target: target }),
   });
-
   const data = await response.json();
-  const chosenRenderer = algo.includes("tree") ? renderTree : renderSorting;
+  let chosenRenderer = renderSorting;
+  if (algo.includes("tree")) chosenRenderer = renderTree;
+  else if (algo.includes("search")) chosenRenderer = renderSearching;
+
   player.loadSteps(data.steps, chosenRenderer);
 }
 
