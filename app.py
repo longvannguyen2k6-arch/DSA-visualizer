@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, jsonify
 from  algorithms.sorting import bubble_sort,insertion_sort,merge_sort,quick_sort
 from algorithms.tree import bfs_tree,dfs_tree
 from algorithms.searching import binary_search,linear_search
+from algorithms.stack_queue_linked_list import stack_operations,queue_operations,linked_list_operations
 
 app = Flask(__name__)
 
@@ -29,6 +30,12 @@ def api_sort():
         steps = linear_search(arr,target)
     elif algo=="binary_search":
         steps=binary_search(arr,target)
+    elif algo=="stack_operations":
+        steps=stack_operations(arr)
+    elif algo=="queue_operations":
+        steps=queue_operations(arr)
+    elif algo=="linked_list_operations":
+        steps=linked_list_operations(arr)
     else:
         steps =merge_sort(arr)
 

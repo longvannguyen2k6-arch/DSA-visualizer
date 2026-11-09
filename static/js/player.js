@@ -77,6 +77,9 @@ async function loadSorting() {
   let chosenRenderer = renderSorting;
   if (algo.includes("tree")) chosenRenderer = renderTree;
   else if (algo.includes("search")) chosenRenderer = renderSearching;
+  else if (algo === "stack") chosenRenderer = renderStack;
+  else if (algo === "queue") chosenRenderer = renderQueue;
+  else if (algo === "linked_list") chosenRenderer = renderLinkedList;
 
   player.loadSteps(data.steps, chosenRenderer);
 }
