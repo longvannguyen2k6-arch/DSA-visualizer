@@ -3,6 +3,7 @@ from  algorithms.sorting import bubble_sort,insertion_sort,merge_sort,quick_sort
 from algorithms.tree import bfs_tree,dfs_tree
 from algorithms.searching import binary_search,linear_search
 from algorithms.stack_queue_linked_list import stack_operations,queue_operations,linked_list_operations
+from algorithms.dp_recursion import recursion_fib, dp_fib
 
 app = Flask(__name__)
 
@@ -36,6 +37,10 @@ def api_sort():
         steps=queue_operations(arr)
     elif algo=="linked_list_operations":
         steps=linked_list_operations(arr)
+    elif algo == "recursion_fib":
+        steps = recursion_fib(arr)
+    elif algo == "dp_fib":
+        steps = dp_fib(arr)
     else:
         steps =merge_sort(arr)
 

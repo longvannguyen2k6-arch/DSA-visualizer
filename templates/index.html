@@ -24,6 +24,8 @@
         <option value="stack_operations">Stack</option>
         <option value="queue_operations">Queue</option>
         <option value="linked_list_operations">Linked List</option>
+        <option value="recursion_fib">Recursion (Fibonacci Call Stack)</option>
+        <option value="dp_fib">Dynamic Programming (Fibonacci Table)</option>
       </select>
       <input
         type="text"
@@ -63,6 +65,7 @@
     <script src="{{ url_for('static', filename='js/player.js') }}"></script>
     <script src="{{ url_for('static', filename='js/tree.js') }}"></script>
     <script src="{{url_for('static',filename='js/searching.js')}}"></script>
-    <script src="{{url_for('static',filename='ls/stack_queue_linked_list.js')}}"></script>
+    <script src="{{url_for('static',filename='js/stack_queue_linked_list.js')}}"></script>
+    <script src="{{url_for('static',filename='js/dp.js')}}"></script>
   </body>
 </html>

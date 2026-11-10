@@ -80,6 +80,9 @@ async function loadSorting() {
   else if (algo === "stack") chosenRenderer = renderStack;
   else if (algo === "queue") chosenRenderer = renderQueue;
   else if (algo === "linked_list") chosenRenderer = renderLinkedList;
+  else if (algo === "stack" || algo === "recursion_fib")
+    chosenRenderer = renderStack;
+  else if (algo === "dp_fib") chosenRenderer = renderDP;
 
   player.loadSteps(data.steps, chosenRenderer);
 }
