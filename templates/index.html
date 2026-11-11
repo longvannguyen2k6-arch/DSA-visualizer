@@ -9,23 +9,48 @@
     />
   </head>
   <body>
-    <h2>DSA Visualizer - Sorting Algorithms</h2>
+    <h2>DSA Visualizer</h2>
 
     <div class="controls">
+      <select id="category-select" onchange="updateAlgoOptions()">
+        <option value="sorting">1. Sorting Algorithms</option>
+        <option value="searching">2. Searching & Pointers</option>
+        <option value="tree">3. Tree Traversals</option>
+        <option value="structures">4. Data Structures</option>
+        <option value="dp_recursion">5. Recursion & DP</option>
+      </select>
       <select id="algo-select" onchange="loadSorting()">
-        <option value="bubble_sort">Bubble Sort</option>
-        <option value="insertion_sort">Insertion Sort</option>
-        <option value="merge_sort">Merge Sort</option>
-        <option value="quick_sort">Quick Sort</option>
-        <option value="bfs_tree">Tree BFS</option>
-        <option value="dfs_tree">Tree DFS</option>
-        <option value="linear_search">Linear Search</option>
-        <option value="binary_search">Binary Search</option>
-        <option value="stack_operations">Stack</option>
-        <option value="queue_operations">Queue</option>
-        <option value="linked_list_operations">Linked List</option>
-        <option value="recursion_fib">Recursion (Fibonacci Call Stack)</option>
-        <option value="dp_fib">Dynamic Programming (Fibonacci Table)</option>
+        <optgroup label="1. Sorting Algorithms">
+          <option value="bubble_sort">Bubble Sort</option>
+          <option value="insertion_sort">Insertion Sort</option>
+          <option value="merge_sort">Merge Sort</option>
+          <option value="quick_sort">Quick Sort</option>
+        </optgroup>
+
+        <optgroup label="2. Searching & Pointers">
+          <option value="linear_search">Linear Search</option>
+          <option value="binary_search">Binary Search</option>
+          <option value="sliding_window">Sliding Window (Max Sum K)</option>
+          <option value="two_pointers">Two Pointers (Pair Sum)</option>
+        </optgroup>
+
+        <optgroup label="3. Tree Traversals">
+          <option value="bfs_tree">Tree BFS</option>
+          <option value="dfs_tree">Tree DFS</option>
+        </optgroup>
+
+        <optgroup label="4. Data Structures">
+          <option value="stack_operations">Stack (LIFO)</option>
+          <option value="queue_operations">Queue (FIFO)</option>
+          <option value="linked_list_operations">Linked List</option>
+        </optgroup>
+
+        <optgroup label="5. Recursion & Dynamic Programming">
+          <option value="recursion_fib">
+            Recursion (Fibonacci Call Stack)
+          </option>
+          <option value="dp_fib">Dynamic Programming (Fibonacci Table)</option>
+        </optgroup>
       </select>
       <input
         type="text"
@@ -59,7 +84,28 @@
 
     <p id="description">Click "Load Data" to initialize...</p>
     <div id="canvas"></div>
-
+    <div id="complexity-panel" class="complexity-panel">
+      <h3 id="comp-name" class="comp-title">Algorithm Complexity</h3>
+      <div class="comp-metrics">
+        <span
+          ><strong>Best Time:</strong>
+          <code id="comp-best" class="badge-best">-</code></span
+        >
+        <span
+          ><strong>Avg Time:</strong>
+          <code id="comp-avg" class="badge-avg">-</code></span
+        >
+        <span
+          ><strong>Worst Time:</strong>
+          <code id="comp-worst" class="badge-worst">-</code></span
+        >
+        <span
+          ><strong>Space:</strong>
+          <code id="comp-space" class="badge-space">-</code></span
+        >
+      </div>
+      <div id="comp-note" class="comp-note"></div>
+    </div>
     <!-- Scripts -->
     <script src="{{ url_for('static', filename='js/sorting.js') }}"></script>
     <script src="{{ url_for('static', filename='js/player.js') }}"></script>
