@@ -1,82 +1,296 @@
+/* ==========================================
+   1. Tổng thể trang web (Gốc sạch sẽ, dễ nhìn)
+   ========================================== */
 body {
-  font-family: Arial, sans-serif;
+  font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background: linear-gradient(135deg, #f4f7fb 0%, #e9eff6 100%);
+  color: #1e293b;
+  margin: 0;
+  padding: 28px 16px;
   text-align: center;
-  padding: 20px;
-}
-.controls {
-  margin-bottom: 20px;
-}
-#description {
-  font-size: 18px;
-  font-weight: bold;
-  min-height: 25px;
-}
-#canvas {
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
-  height: 300px;
-  border: 1px solid #ccc;
-  padding: 20px;
-  gap: 10px;
-}
-.bar {
-  width: 40px;
-  background-color: #3498db; /* Default blue */
-  color: white;
-  font-weight: bold;
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  padding-bottom: 5px;
-  border-radius: 4px 4px 0 0;
-  transition: height 0.2s ease;
-}
-.complexity-panel {
-  max-width: 760px;
-  margin: 15px auto;
-  padding: 14px 20px;
-  background: #f8f9fa;
-  border-radius: 8px;
-  border: 1px solid #dee2e6;
-  text-align: left;
-  font-family: sans-serif;
+  min-height: 100vh;
 }
 
-.comp-title {
-  margin: 0 0 8px 0;
-  color: #2c3e50;
+/* Tiêu đề chính */
+h1,
+h2 {
+  font-size: 28px;
+  font-weight: 800;
+  color: #0f172a;
+  letter-spacing: -0.5px;
+  margin: 0 0 20px 0;
+}
+
+/* ==========================================
+   2. Bộ điều khiển (Controls, Input & Button)
+   ========================================== */
+select,
+input[type="text"],
+input[type="number"] {
+  padding: 9px 14px;
+  margin: 4px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  background-color: #ffffff;
+  color: #1e293b;
+  font-size: 14px;
+  font-weight: 500;
+  outline: none;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  transition: all 0.2s ease;
+}
+
+select:hover,
+input[type="text"]:hover,
+input[type="number"]:hover {
+  border-color: #94a3b8;
+}
+
+select:focus,
+input[type="text"]:focus,
+input[type="number"]:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+}
+
+button {
+  padding: 9px 16px;
+  margin: 4px;
+  border: none;
+  border-radius: 8px;
+  background: #3b82f6;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(59, 130, 246, 0.25);
+  transition: all 0.15s ease;
+}
+
+button:hover {
+  background: #2563eb;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(37, 99, 235, 0.3);
+}
+
+button:active {
+  transform: translateY(0);
+}
+
+/* Thanh trượt tốc độ */
+input[type="range"] {
+  vertical-align: middle;
+  accent-color: #3b82f6;
+  cursor: pointer;
+}
+
+/* ==========================================
+   3. Dòng chữ mô tả từng bước (#description)
+   ========================================== */
+#description {
+  display: inline-block;
+  min-width: 340px;
+  margin: 14px auto;
+  padding: 10px 22px;
+  background: #ffffff;
+  border-left: 4px solid #3b82f6;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #1e293b;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.06);
+}
+
+/* ==========================================
+   4. KHU VỰC BIỂU ĐỒ SỐNG ĐỘNG (#canvas)
+   ========================================== */
+#canvas {
+  max-width: 920px;
+  height: 370px;
+  margin: 12px auto 22px auto;
+  padding: 24px 20px 16px 20px;
+  background: #ffffff;
+  /* Lưới toạ độ mờ tạo cảm giác trực quan chuẩn phòng lab */
+  background-image: 
+    linear-gradient(to right, #f1f5f9 1px, transparent 1px),
+    linear-gradient(to bottom, #f1f5f9 1px, transparent 1px);
+  background-size: 24px 24px;
+  border-radius: 16px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 
+    0 12px 30px -5px rgba(15, 23, 42, 0.08),
+    inset 0 -2px 6px rgba(15, 23, 42, 0.02);
+  display: flex;
+  gap: 8px;
+  align-items: flex-end;
+  justify-content: center;
+  box-sizing: border-box;
+  overflow-x: auto;
+  position: relative;
+}
+
+/* Chuyển động mượt mà cho mọi khối/cột/node bên trong canvas */
+#canvas > div {
+  transition: height 0.22s ease, transform 0.22s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
+  position: relative;
+}
+
+/* --- ĐỊNH DẠNG CỘT BIỂU ĐỒ (.bar) --- */
+.bar {
+  width: 36px;
+  min-width: 24px;
+  background-color: #3b82f6; /* Màu xanh dương mặc định khi chưa so sánh */
+  border-radius: 6px 6px 2px 2px;
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 13px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 6px;
+  box-sizing: border-box;
+  cursor: pointer;
+  position: relative;
+}
+
+/* Vạch sáng phản quang nhẹ trên đỉnh cột giúp màu JS nào cũng nổi khối 3D */
+.bar::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.55);
+  border-radius: 6px 6px 0 0;
+  pointer-events: none;
+}
+
+/* Rê chuột vào cột: nảy nhẹ và đổ bóng rõ hơn */
+.bar:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.18);
+  filter: brightness(1.08);
+}
+
+/* ==========================================================================
+   CÁC TRẠNG THÁI MÀU CỦA JS: GIỮ NGUYÊN MÀU + THÊM PHÁT SÁNG VÀ NẢY SỐNG ĐỘNG
+   ========================================================================== */
+
+/* 1. Đang so sánh (Vàng JS #f39c12): Hào quang vàng rực rỡ + nhún nảy */
+#canvas div[style*="243, 156, 18"],
+#canvas div[style*="#f39c12"] {
+  box-shadow: 0 0 18px rgba(243, 156, 18, 0.85), 0 4px 10px rgba(0, 0, 0, 0.2) !important;
+  transform: translateY(-6px) scale(1.06);
+  z-index: 5;
+}
+
+/* 2. Đang hoán đổi/Swap (Đỏ JS #e74c3c): Hào quang đỏ rực + nhô cao nổi bật */
+#canvas div[style*="231, 76, 60"],
+#canvas div[style*="#e74c3c"] {
+  box-shadow: 0 0 22px rgba(231, 76, 60, 0.9), 0 6px 12px rgba(0, 0, 0, 0.25) !important;
+  transform: translateY(-8px) scale(1.1);
+  z-index: 10;
+}
+
+/* 3. Hoàn thành/Done (Xanh lá JS #2ecc71): Hào quang xanh lá + hiệu ứng nảy ăn mừng */
+#canvas div[style*="46, 204, 113"],
+#canvas div[style*="#2ecc71"] {
+  box-shadow: 0 0 18px rgba(46, 204, 113, 0.85), 0 4px 10px rgba(0, 0, 0, 0.15) !important;
+  animation: doneBounce 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  z-index: 4;
+}
+
+/* 4. Pop/Delete trong Stack, Queue, Linked List (Tím JS #9b59b6): Hào quang tím */
+#canvas div[style*="155, 89, 182"],
+#canvas div[style*="#9b59b6"] {
+  box-shadow: 0 0 18px rgba(155, 89, 182, 0.85), 0 4px 10px rgba(0, 0, 0, 0.2) !important;
+  transform: translateY(-6px) scale(1.08);
+  z-index: 8;
+}
+
+@keyframes doneBounce {
+  0% { transform: scale(0.92); }
+  60% { transform: scale(1.12); }
+  100% { transform: scale(1); }
+}
+
+/* ==========================================
+   5. Bảng phân tích độ phức tạp Big-O
+   ========================================== */
+.complexity-panel,
+#complexity-panel {
+  max-width: 900px;
+  margin: 0 auto 24px auto;
+  padding: 18px 24px;
+  background: #ffffff;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 4px 15px rgba(15, 23, 42, 0.05);
+  text-align: left;
+  box-sizing: border-box;
+}
+
+.comp-title,
+#comp-name {
+  margin: 0 0 12px 0;
+  color: #0f172a;
   font-size: 16px;
+  font-weight: 700;
+  border-bottom: 1px solid #f1f5f9;
+  padding-bottom: 8px;
 }
 
 .comp-metrics {
   display: flex;
-  gap: 24px;
+  gap: 16px;
   flex-wrap: wrap;
   font-size: 14px;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
+  align-items: center;
+}
+
+.comp-metrics span {
+  background: #f8fafc;
+  padding: 6px 12px;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
 }
 
 .comp-metrics code {
-  font-weight: bold;
+  font-weight: 700;
   font-size: 14px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  margin-left: 4px;
 }
 
-.badge-best {
-  color: #27ae60;
+.badge-best,
+#comp-best {
+  color: #15803d;
+  background: #dcfce7;
 }
-.badge-avg {
-  color: #e67e22;
+.badge-avg,
+#comp-avg {
+  color: #b45309;
+  background: #fef3c7;
 }
-.badge-worst {
-  color: #c0392b;
+.badge-worst,
+#comp-worst {
+  color: #b91c1c;
+  background: #fee2e2;
 }
-.badge-space {
-  color: #2980b9;
+.badge-space,
+#comp-space {
+  color: #1d4ed8;
+  background: #dbeafe;
 }
 
-.comp-note {
-  font-size: 13px;
-  color: #555;
+.comp-note,
+#comp-note {
+  font-size: 13.5px;
+  color: #475569;
   font-style: italic;
+  margin-top: 6px;
 }
