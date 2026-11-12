@@ -18,12 +18,13 @@ def bubble_sort(arr):
             })
 
             if a[j] > a[j + 1]:
+                left_val, right_val = a[j], a[j + 1]
                 a[j], a[j + 1] = a[j + 1], a[j]
                 steps.append({
                     "state": a.copy(),
                     "highlights": [j, j + 1],
                     "action": "swap",
-                    "description": f"swap {a[j + 1]} and {a[j]} because {a[j + 1]} > {a[j]}"
+                    "description": f"Swap {left_val} and {right_val} because {left_val} > {right_val}"
                 })
     steps.append({
         "state": a.copy(),
@@ -118,7 +119,7 @@ def merge_sort(arr):
                 "state": a.copy(),
                 "highlights": [k],
                  "action": "swap",
-                "description": f"Placed {a[k]} at index{k}"
+                "description": f"Placed {a[k]} at index {k}"
                                     })
             k += 1
         while i < len(left_part):
@@ -127,7 +128,7 @@ def merge_sort(arr):
                 "state": a.copy(),
                  "highlights": [k],
                  "action": "swap",
-                "description": f"Placed {a[k]} at index{k}"
+                "description": f"Placed {a[k]} at index {k}"
                                     })
             i += 1
             k += 1
@@ -137,7 +138,7 @@ def merge_sort(arr):
                 "state": a.copy(),
                 "highlights": [k],
                 "action": "swap",
-                "description": f"Placed {a[k]} at index{k}"
+                "description": f"Placed {a[k]} at index {k}"
                         })
             j += 1
             k += 1
@@ -196,7 +197,7 @@ def quick_sort(arr):
             "state": a.copy(),
             "highlights": [i+1,high],
             "action": "swap",
-            "description": f"Placing pivot {pivot} at its correct index{i+1}"
+            "description": f"Placing pivot {pivot} at its correct index {i+1}"
                                 })
         return i + 1
 

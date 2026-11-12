@@ -17,6 +17,12 @@ const player = {
 
   play() {
     if (this.timer) return; // Prevent multiple intervals
+    if (this.currentIndex >= this.steps.length - 1) {
+      this.currentIndex = 0;
+      if (this.steps.length > 0) {
+        this.renderFunc(this.steps[0]);
+      }
+    }
     this.timer = setInterval(() => {
       if (this.currentIndex < this.steps.length - 1) {
         this.currentIndex++;

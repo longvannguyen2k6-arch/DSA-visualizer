@@ -77,11 +77,29 @@ button:active {
   transform: translateY(0);
 }
 
-/* Thanh trượt tốc độ */
+/* Thanh trượt tốc độ (Tách thành 1 dòng riêng) */
+.speed-control {
+  margin-top: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #334155;
+}
+
+.speed-control span {
+  color: #2563eb;
+  font-family: Consolas, monospace;
+  font-size: 15px;
+}
+
 input[type="range"] {
   vertical-align: middle;
   accent-color: #3b82f6;
   cursor: pointer;
+  width: 180px;
 }
 
 /* ==========================================
@@ -125,7 +143,7 @@ input[type="range"] {
   align-items: flex-end;
   justify-content: center;
   box-sizing: border-box;
-  overflow-x: auto;
+  overflow: auto;
   position: relative;
 }
 

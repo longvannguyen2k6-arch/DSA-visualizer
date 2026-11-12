@@ -4,6 +4,7 @@ function renderSearching(stepData) {
   canvas.style.flexDirection = "row";
   canvas.style.alignItems = "center";
   canvas.style.justifyContent = "center";
+  canvas.style.gap = "8px";
 
   stepData.state.forEach((value, index) => {
     const box = document.createElement("div");

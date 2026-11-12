@@ -3,6 +3,7 @@ function renderSorting(stepData) {
   canvas.style.justifyContent = "center";
   canvas.style.flexDirection = "row";
   canvas.style.alignItems = "flex-end";
+  canvas.style.gap = "8px";
   canvas.innerHTML = ""; // Clear previous step
 
   stepData.state.forEach((value, index) => {

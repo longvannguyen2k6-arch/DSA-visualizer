@@ -85,8 +85,8 @@ def sliding_window(arr, k):
     steps = []
     a = arr.copy()
     n = len(a)
-    if k <= 0 or k > n:
-        k = min(3, n)
+    if k is None or not isinstance(k, int) or k <= 0 or k > n:
+        k = min(3, n) if n > 0 else 1
 
     steps.append({
         "state": a.copy(),
@@ -143,7 +143,7 @@ def two_pointers(arr, target):
         "state": a.copy(),
         "highlights": [],
         "action": "init",
-        "description": f"Two Pointers on sorted array: Finding pair with sum == {target}"
+        "description": f"Two Pointers on sorted array: Finding pair with sum = {target}"
     })
 
     left = 0

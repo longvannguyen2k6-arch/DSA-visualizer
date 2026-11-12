@@ -70,16 +70,17 @@
       <button onclick="player.pause()">⏸ Pause</button>
       <button onclick="player.prev()">⏮ Prev Step</button>
       <button onclick="player.next()">⏭ Next Step</button>
-      <label
-        >Delay (ms):
+      <div class="speed-control">
+        <label for="speed">Delay: <span id="speed-value">500</span> ms</label>
         <input
           type="range"
           id="speed"
           min="100"
           max="1500"
           value="500"
-          onchange="player.setSpeed(this.value)"
-      /></label>
+          oninput="document.getElementById('speed-value').innerText = this.value; player.setSpeed(this.value)"
+        />
+      </div>
     </div>
 
     <p id="description">Click "Load Data" to initialize...</p>

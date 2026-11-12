@@ -41,7 +41,14 @@ def api_searching():
     data = request.get_json() or {}
     arr = data.get("array") or [5, 2, 8, 1, 9, 3]
     algo = data.get("algorithm", "linear_search")
-    target = data.get("target", 8)
+    target = data.get("target")
+    if target is None:
+        target = 8
+    else:
+        try:
+            target = int(target)
+        except (ValueError, TypeError):
+            target = 8
 
     if algo == "linear_search":
         steps = linear_search(arr, target)
